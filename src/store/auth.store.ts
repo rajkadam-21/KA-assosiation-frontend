@@ -22,9 +22,11 @@ export const authStore = {
 },
 
   login(token: string, user: AuthUser) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
-  },
+  if (!token || !user) return;
+
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
+},
 
   logout() {
     localStorage.clear();
