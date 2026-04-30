@@ -9,9 +9,17 @@ export type AuthUser = {
 
 export const authStore = {
   get user(): AuthUser | null {
-    const raw = localStorage.getItem("user");
-    return raw ? JSON.parse(raw) : null;
-  },
+  const raw = localStorage.getItem("user");
+
+  if (!raw || raw === "undefined") return null;
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    localStorage.removeItem("user");
+    return null;
+  }
+},
 
   login(token: string, user: AuthUser) {
     localStorage.setItem("token", token);
