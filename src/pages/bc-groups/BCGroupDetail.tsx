@@ -162,7 +162,7 @@ export default function BCGroupDetail() {
             );
         });
 
-
+    if (!bcGroup) return null;
     return (
         <div className="space-y-8">
             {/* HEADER */}
@@ -370,7 +370,7 @@ export default function BCGroupDetail() {
                     </div>
                     <div className="mt-5">
                         <PartyLedgerTable
-                            bcGroupName={bcGroup.name}
+                            bcGroupName={bcGroup?.name}
                             parties={filteredParties}
                             transactions={transactions}
                             totalCycles={bcGroup?.months}
