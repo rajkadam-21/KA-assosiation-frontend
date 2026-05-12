@@ -13,10 +13,13 @@ export const createBCGroup = async (payload: {
   months: number;
   party_limit: number;
   monthly_party_amount: number;
+
+  start_month: string; // ✅ NEW
+  start_year: number; // ✅ NEW
 }) => {
-    const res = await api.post("/bc-groups/", payload);
-    console.log(res)
-  return res
+  const res = await api.post("/bc-groups/", payload);
+
+  return res.data;
 };
 
 export const fetchBCGroupById = async (id: number) => {

@@ -175,6 +175,13 @@ export default function BCGroupDetail() {
                         {bcGroup?.months} months • ₹{" "}
                         {bcGroup?.total_amount?.toLocaleString()}
                     </p>
+
+                    <p className="text-sm text-muted-foreground">
+                        Starts from{" "}
+                        {bcGroup?.start_month?.charAt(0).toUpperCase() +
+                            bcGroup?.start_month?.slice(1)}{" "}
+                        {bcGroup?.start_year}
+                    </p>
                     <Button
                         variant="outline"
                         onClick={handleDownloadPDF}

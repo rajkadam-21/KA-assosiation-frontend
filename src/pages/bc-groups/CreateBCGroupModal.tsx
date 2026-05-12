@@ -23,12 +23,15 @@ export default function CreateBCGroupModal({
   const qc = useQueryClient();
 
   const { register, handleSubmit, watch, reset } = useForm({
-    defaultValues: {
-      name: "",
-      months: 0,
-      party_limit: 0,
-      monthly_party_amount: 0,
-    },
+  defaultValues: {
+  name: "",
+  months: 0,
+  party_limit: 0,
+  monthly_party_amount: 0,
+
+  start_month: "january",
+  start_year: new Date().getFullYear(),
+},
   });
 
   const months = watch("months");
@@ -48,13 +51,16 @@ export default function CreateBCGroupModal({
   });
 
   const onSubmit = (data: any) => {
-    mutation.mutate({
-      name: data.name,
-      months: Number(data.months),
-      party_limit: Number(data.party_limit),
-      monthly_party_amount: Number(data.monthly_party_amount),
-      total_amount: totalAmount,
-    });
+mutation.mutate({
+  name: data.name,
+  months: Number(data.months),
+  party_limit: Number(data.party_limit),
+  monthly_party_amount: Number(data.monthly_party_amount),
+  total_amount: totalAmount,
+
+  start_month: data.start_month, // ✅ NEW
+  start_year: Number(data.start_year), // ✅ NEW
+});
   };
 
   return (
@@ -105,6 +111,41 @@ export default function CreateBCGroupModal({
               />
             </div>
           </div>
+
+<div className="grid grid-cols-2 gap-4">
+  <div>
+    <Label>Start Month</Label>
+
+    <select
+      {...register("start_month")}
+      className="w-full border rounded-md h-10 px-3 bg-background"
+    >
+      <option value="january">January</option>
+      <option value="february">February</option>
+      <option value="march">March</option>
+      <option value="april">April</option>
+      <option value="may">May</option>
+      <option value="june">June</option>
+      <option value="july">July</option>
+      <option value="august">August</option>
+      <option value="september">September</option>
+      <option value="october">October</option>
+      <option value="november">November</option>
+      <option value="december">December</option>
+    </select>
+  </div>
+
+  <div>
+    <Label>Start Year</Label>
+
+    <Input
+      type="number"
+      {...register("start_year", {
+        valueAsNumber: true,
+      })}
+    />
+  </div>
+</div>
 
           <Separator />
 
